@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin">
+
+    <ImageView
+        android:layout_width="@dimen/recipes_list_image_size"
+        android:layout_height="@dimen/recipes_list_image_size"
+        android:id="@+id/imgRecipe"
+        android:src="@mipmap/ic_launcher"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:layout_weight="1"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:id="@+id/txtRecipeName"
+        android:layout_below="@+id/imgRecipe"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/btn_star_big_off"
+        android:padding="@dimen/row_icons_padding"
+        android:background="@android:color/transparent"
+        android:id="@+id/imgFav"
+        android:layout_below="@+id/txtRecipeName"
+        android:layout_alignLeft="@+id/txtRecipeName"
+        android:layout_alignStart="@+id/txtRecipeName" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_share"
+        android:padding="@dimen/row_icons_padding"
+        android:tint="@android:color/darker_gray"
+        android:background="@android:color/transparent"
+        android:id="@+id/imgShare"
+        android:layout_below="@+id/txtRecipeName"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_delete"
+        android:padding="@dimen/row_icons_padding"
+        android:tint="@android:color/darker_gray"
+        android:background="@android:color/transparent"
+        android:id="@+id/imgDelete"
+        android:layout_below="@+id/txtRecipeName"
+        android:layout_alignRight="@+id/txtRecipeName"
+        android:layout_alignEnd="@+id/txtRecipeName" />
+
+</RelativeLayout>

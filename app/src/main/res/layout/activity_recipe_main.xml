@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/layoutContainer"
-    tools:context=".recipesmain.ui.RecipesMainActivity">
+    tools:context=".recipemain.ui.RecipeMainActivity">
 
     <ImageView
         android:layout_width="@dimen/recipes_main_image_width"

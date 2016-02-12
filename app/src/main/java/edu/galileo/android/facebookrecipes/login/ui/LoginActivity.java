@@ -17,7 +17,7 @@ import com.facebook.login.widget.LoginButton;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.facebookrecipes.R;
-import edu.galileo.android.facebookrecipes.recipesmain.ui.RecipesMainActivity;
+import edu.galileo.android.facebookrecipes.recipemain.ui.RecipeMainActivity;
 
 public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.btnLogin) LoginButton loginButton;
@@ -74,6 +74,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void navigateToMainScreen() {
-        startActivity(new Intent(this, RecipesMainActivity.class));
+        startActivity(new Intent(this, RecipeMainActivity.class));
     }
 }

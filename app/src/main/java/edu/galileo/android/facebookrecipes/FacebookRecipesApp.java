@@ -6,11 +6,17 @@ import com.facebook.FacebookSdk;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
 import edu.galileo.android.facebookrecipes.lib.di.LibsModule;
-import edu.galileo.android.facebookrecipes.recipesmain.di.DaggerRecipesMainComponent;
-import edu.galileo.android.facebookrecipes.recipesmain.di.RecipesMainComponent;
-import edu.galileo.android.facebookrecipes.recipesmain.di.RecipesMainModule;
-import edu.galileo.android.facebookrecipes.recipesmain.ui.RecipesMainActivity;
-import edu.galileo.android.facebookrecipes.recipesmain.ui.RecipesMainView;
+import edu.galileo.android.facebookrecipes.recipelist.di.DaggerRecipeListComponent;
+import edu.galileo.android.facebookrecipes.recipelist.di.RecipeListComponent;
+import edu.galileo.android.facebookrecipes.recipelist.di.RecipeListModule;
+import edu.galileo.android.facebookrecipes.recipelist.ui.RecipesListActivity;
+import edu.galileo.android.facebookrecipes.recipelist.ui.RecipesListView;
+import edu.galileo.android.facebookrecipes.recipelist.ui.adapters.OnItemClickListener;
+import edu.galileo.android.facebookrecipes.recipemain.di.DaggerRecipeMainComponent;
+import edu.galileo.android.facebookrecipes.recipemain.di.RecipeMainComponent;
+import edu.galileo.android.facebookrecipes.recipemain.di.RecipeMainModule;
+import edu.galileo.android.facebookrecipes.recipemain.ui.RecipeMainActivity;
+import edu.galileo.android.facebookrecipes.recipemain.ui.RecipeMainView;
 
 /**
  * Created by ykro.
@@ -32,11 +38,19 @@ public class FacebookRecipesApp extends Application {
         FacebookSdk.sdkInitialize(getApplicationContext());
     }
 
-    public RecipesMainComponent getRecipesMainComponent(RecipesMainActivity activity, RecipesMainView view) {
-        return DaggerRecipesMainComponent
+    public RecipeMainComponent getRecipeMainComponent(RecipeMainActivity activity, RecipeMainView view) {
+        return DaggerRecipeMainComponent
                 .builder()
                 .libsModule(new LibsModule(activity))
-                .recipesMainModule(new RecipesMainModule(view))
+                .recipeMainModule(new RecipeMainModule(view))
+                .build();
+    }
+
+    public RecipeListComponent getRecipeListComponent(RecipesListActivity activity, RecipesListView view, OnItemClickListener onItemClickListener) {
+        return DaggerRecipeListComponent
+                .builder()
+                .libsModule(new LibsModule(activity))
+                .recipeListModule(new RecipeListModule(view, onItemClickListener))
                 .build();
     }
 }

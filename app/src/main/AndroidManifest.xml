@@ -16,19 +16,20 @@
             android:value="@string/FACEBOOK_APP_ID" />
 
         <activity android:name=".login.ui.LoginActivity">
+
+        </activity>
+        <activity android:name=".recipemain.ui.RecipeMainActivity" />
+        <activity android:name=".recipelist.ui.RecipesListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".recipesmain.ui.RecipesMainActivity" />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".recipeslist.RecipesListActivity"></activity>
     </application>
 
 </manifest>

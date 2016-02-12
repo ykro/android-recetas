@@ -44,12 +44,12 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancel() {
-                Snackbar.make(loginContainer, R.string.login_canel_error_message, Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(loginContainer, R.string.login_cancel_error, Snackbar.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(FacebookException exception) {
-                String msgError = String.format(getString(R.string.login_error_message), exception.getMessage());
+                String msgError = String.format(getString(R.string.login_error), exception.getMessage());
                 Snackbar.make(loginContainer, msgError, Snackbar.LENGTH_SHORT).show();
             }
         });

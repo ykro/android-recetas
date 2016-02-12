@@ -9,6 +9,7 @@ import edu.galileo.android.facebookrecipes.lib.di.LibsModule;
 import edu.galileo.android.facebookrecipes.recipesmain.di.DaggerRecipesMainComponent;
 import edu.galileo.android.facebookrecipes.recipesmain.di.RecipesMainComponent;
 import edu.galileo.android.facebookrecipes.recipesmain.di.RecipesMainModule;
+import edu.galileo.android.facebookrecipes.recipesmain.ui.RecipesMainActivity;
 import edu.galileo.android.facebookrecipes.recipesmain.ui.RecipesMainView;
 
 /**
@@ -31,10 +32,10 @@ public class FacebookRecipesApp extends Application {
         FacebookSdk.sdkInitialize(getApplicationContext());
     }
 
-    public RecipesMainComponent getRecipesMainComponent(RecipesMainView view) {
+    public RecipesMainComponent getRecipesMainComponent(RecipesMainActivity activity, RecipesMainView view) {
         return DaggerRecipesMainComponent
                 .builder()
-                .libsModule(new LibsModule())
+                .libsModule(new LibsModule(activity))
                 .recipesMainModule(new RecipesMainModule(view))
                 .build();
     }

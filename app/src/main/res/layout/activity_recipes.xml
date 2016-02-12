@@ -7,6 +7,55 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/layoutContainer"
     tools:context=".recipesmain.ui.RecipesMainActivity">
+
+    <ImageView
+        android:layout_width="@dimen/recipes_main_image_width"
+        android:layout_height="@dimen/recipes_main_image_height"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imgRecipe"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgRecipe"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
+
+        <ImageButton
+            android:layout_width="@dimen/recipes_main_icon"
+            android:layout_height="@dimen/recipes_main_icon"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:id="@+id/imgDismiss"
+            android:src="@android:drawable/ic_delete"
+            android:background="@color/colorAccent"
+            android:tint="@android:color/white"
+            />
+
+        <ImageButton
+            android:layout_width="@dimen/recipes_main_icon"
+            android:layout_height="@dimen/recipes_main_icon"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:id="@+id/imgKeep"
+            android:src="@android:drawable/btn_star_big_on"
+            android:background="@color/colorPrimaryDark"
+            android:tint="@android:color/white"
+            />
+    </LinearLayout>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_above="@+id/linearLayout"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

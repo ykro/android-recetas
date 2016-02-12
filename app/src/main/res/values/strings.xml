@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">FacebookRecipes</string>
-    <string name="login.error.message">Imposible iniciar sesión %s</string>
-    <string name="login.canel.error.message">Inicio de sesión cancelado</string>
+    <string name="login.error">Imposible iniciar sesión %s</string>
+    <string name="login.cancel.error">Inicio de sesión cancelado</string>
+
+    <string name="recipesmain.error">Imposible obtener información %s</string>
+    <string name="recipesmain.notice.saved">Guardado exitosamente</string>
 </resources>

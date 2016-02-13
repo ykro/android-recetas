@@ -64,7 +64,6 @@ public class RecipeMainRepositoryImpl implements RecipeMainRepository {
     public void saveRecipe(Recipe recipe) {
         recipe.save();
         post();
-        //si hay error post("",RecipesMainEvent.SAVE_EVENT);
     }
 
     private void post() {

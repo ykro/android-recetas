@@ -3,20 +3,22 @@ package edu.galileo.android.facebookrecipes.recipelist;
 import edu.galileo.android.facebookrecipes.entities.Recipe;
 import edu.galileo.android.facebookrecipes.lib.EventBus;
 import edu.galileo.android.facebookrecipes.recipelist.events.RecipeListEvent;
-import edu.galileo.android.facebookrecipes.recipelist.ui.RecipesListView;
+import edu.galileo.android.facebookrecipes.recipelist.ui.RecipeListView;
 
 /**
  * Created by ykro.
  */
 public class RecipeListPresenterImpl implements RecipeListPresenter {
     private EventBus eventBus;
-    private RecipesListView view;
-    private RecipeListInteractor interactor;
+    private RecipeListView view;
+    private RecipeListInteractor listInteractor;
+    private StoredRecipesInteractor storedInteractor;
 
-    public RecipeListPresenterImpl(EventBus eventBus, RecipesListView view, RecipeListInteractor interactor) {
+    public RecipeListPresenterImpl(EventBus eventBus, RecipeListView view, RecipeListInteractor listInteractor, StoredRecipesInteractor storedInteractor) {
         this.eventBus = eventBus;
         this.view = view;
-        this.interactor = interactor;
+        this.listInteractor = listInteractor;
+        this.storedInteractor = storedInteractor;
     }
 
     @Override
@@ -32,23 +34,37 @@ public class RecipeListPresenterImpl implements RecipeListPresenter {
 
     @Override
     public void getRecipes() {
-        interactor.execute();
+        listInteractor.execute();
     }
 
     @Override
-    public void setFavorite(Recipe recipe) {
-
+    public void toggleFavorite(Recipe recipe) {
+        boolean fav = recipe.getFavorite();
+        recipe.setFavorite(!fav);
+        storedInteractor.executeUpdate(recipe);
     }
 
     @Override
-    public void delteRecipe(Recipe recipe) {
-
+    public void removeRecipe(Recipe recipe) {
+        storedInteractor.executeDelete(recipe);
     }
 
     @Override
-    public void onEvent(RecipeListEvent event) {
+    public void onEventMainThread(RecipeListEvent event) {
         if (this.view != null) {
-            view.setRecipes(event.getRecipes());
+            switch (event.getType()){
+                case RecipeListEvent.READ_EVENT:
+                    view.setRecipes(event.getRecipes());
+                    break;
+                case RecipeListEvent.UPDATE_EVENT:
+                    view.recipeUpdated();
+                    break;
+                case RecipeListEvent.DELETE_EVENT:
+                    Recipe recipe = event.getRecipes().get(0);
+                    view.recipeDeleted(recipe);
+                    break;
+
+            }
         }
     }
 }

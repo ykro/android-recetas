@@ -5,8 +5,7 @@ import edu.galileo.android.facebookrecipes.entities.Recipe;
 /**
  * Created by ykro.
  */
-public interface RecipeListRepository {
-    void getSavedRecipes();
-    void updateRecipe(Recipe recipe);
-    void removeRecipe(Recipe recipe);
+public interface StoredRecipesInteractor {
+    void executeUpdate(Recipe recipe);
+    void executeDelete(Recipe recipe);
 }

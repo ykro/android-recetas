@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".recipelist.ui.RecipeListActivity">
+    <item
+        android:id="@+id/action_main"
+        android:title="@string/recipelist.menu.action.main"
+        android:icon="@android:drawable/ic_menu_gallery"
+        app:showAsAction="always" />
+</menu>

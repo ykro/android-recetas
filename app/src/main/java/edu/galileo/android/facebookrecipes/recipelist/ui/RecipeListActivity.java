@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.List;
 
@@ -20,8 +22,9 @@ import edu.galileo.android.facebookrecipes.entities.Recipe;
 import edu.galileo.android.facebookrecipes.recipelist.RecipeListPresenter;
 import edu.galileo.android.facebookrecipes.recipelist.ui.adapters.OnItemClickListener;
 import edu.galileo.android.facebookrecipes.recipelist.ui.adapters.RecipesAdapter;
+import edu.galileo.android.facebookrecipes.recipemain.ui.RecipeMainActivity;
 
-public class RecipesListActivity extends AppCompatActivity implements RecipesListView, OnItemClickListener {
+public class RecipeListActivity extends AppCompatActivity implements RecipeListView, OnItemClickListener {
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -42,15 +45,37 @@ public class RecipesListActivity extends AppCompatActivity implements RecipesLis
         presenter.getRecipes();
     }
 
-    private void setupInjection() {
-        FacebookRecipesApp app = (FacebookRecipesApp)getApplication();
-        app.getRecipeListComponent(this, this, this).inject(this);
-    }
-
     @Override
     protected void onDestroy() {
         presenter.onDestroy();
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_recipes_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_main) {
+            navigateToMainScreen();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void navigateToMainScreen() {
+        startActivity(new Intent(this, RecipeMainActivity.class));
+    }
+
+    private void setupInjection() {
+        FacebookRecipesApp app = (FacebookRecipesApp)getApplication();
+        app.getRecipeListComponent(this, this, this).inject(this);
     }
 
     private void setupRecyclerView() {
@@ -66,21 +91,39 @@ public class RecipesListActivity extends AppCompatActivity implements RecipesLis
 
     @Override
     public void onFavClick(Recipe recipe) {
-        Log.e("ASDF","fav");
+        presenter.toggleFavorite(recipe);
     }
 
     @Override
     public void onShareClick(Recipe recipe) {
         Log.e("ASDF","share");
+        /*
+        SharePhoto photo = new SharePhoto.Builder()
+                .setBitmap(image)
+                .build();
+        SharePhotoContent content = new SharePhotoContent.Builder()
+                .addPhoto(photo)
+                .build();
+                */
     }
 
     @Override
     public void onDeleteClick(Recipe recipe) {
-        Log.e("ASDF","delete");
+        presenter.removeRecipe(recipe);
     }
 
     @Override
     public void setRecipes(List<Recipe> data) {
         adapter.setRecipes(data);
+    }
+
+    @Override
+    public void recipeUpdated() {
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void recipeDeleted(Recipe recipe) {
+        adapter.removeRecipe(recipe);
     }
 }

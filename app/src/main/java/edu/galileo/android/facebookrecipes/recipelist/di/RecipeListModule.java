@@ -16,7 +16,9 @@ import edu.galileo.android.facebookrecipes.recipelist.RecipeListPresenter;
 import edu.galileo.android.facebookrecipes.recipelist.RecipeListPresenterImpl;
 import edu.galileo.android.facebookrecipes.recipelist.RecipeListRepository;
 import edu.galileo.android.facebookrecipes.recipelist.RecipeListRepositoryImpl;
-import edu.galileo.android.facebookrecipes.recipelist.ui.RecipesListView;
+import edu.galileo.android.facebookrecipes.recipelist.StoredRecipesInteractor;
+import edu.galileo.android.facebookrecipes.recipelist.StoredRecipesInteractorImpl;
+import edu.galileo.android.facebookrecipes.recipelist.ui.RecipeListView;
 import edu.galileo.android.facebookrecipes.recipelist.ui.adapters.OnItemClickListener;
 import edu.galileo.android.facebookrecipes.recipelist.ui.adapters.RecipesAdapter;
 
@@ -25,27 +27,32 @@ import edu.galileo.android.facebookrecipes.recipelist.ui.adapters.RecipesAdapter
  */
 @Module
 public class RecipeListModule {
-    RecipesListView view;
+    RecipeListView view;
     OnItemClickListener onItemClickListener;
 
-    public RecipeListModule(RecipesListView view, OnItemClickListener onItemClickListener) {
+    public RecipeListModule(RecipeListView view, OnItemClickListener onItemClickListener) {
         this.view = view;
         this.onItemClickListener = onItemClickListener;
     }
 
     @Provides @Singleton
-    RecipesListView provideRecipeListView() {
+    RecipeListView provideRecipeListView() {
         return this.view;
     }
 
     @Provides @Singleton
-    RecipeListPresenter provideRecipeListPresenter(EventBus eventBus, RecipesListView view, RecipeListInteractor interactor) {
-        return new RecipeListPresenterImpl(eventBus, view, interactor);
+    RecipeListPresenter provideRecipeListPresenter(EventBus eventBus, RecipeListView view, RecipeListInteractor listInteractor, StoredRecipesInteractor storedInteractor) {
+        return new RecipeListPresenterImpl(eventBus, view, listInteractor, storedInteractor);
     }
 
     @Provides @Singleton
     RecipeListInteractor provideRecipeListInteractor(RecipeListRepository repository) {
         return new RecipeListInteractorImpl(repository);
+    }
+
+    @Provides @Singleton
+    StoredRecipesInteractor provideStoredRecipesInteractor(RecipeListRepository repository) {
+        return new StoredRecipesInteractorImpl(repository);
     }
 
     @Provides @Singleton

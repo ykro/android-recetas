@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import edu.galileo.android.facebookrecipes.lib.di.LibsModule;
-import edu.galileo.android.facebookrecipes.recipelist.ui.RecipesListActivity;
+import edu.galileo.android.facebookrecipes.recipelist.ui.RecipeListActivity;
 
 /**
  * Created by ykro.
@@ -12,5 +12,5 @@ import edu.galileo.android.facebookrecipes.recipelist.ui.RecipesListActivity;
 @Singleton
 @Component(modules = {RecipeListModule.class, LibsModule.class})
 public interface RecipeListComponent {
-    void inject(RecipesListActivity activity);
+    void inject(RecipeListActivity activity);
 }

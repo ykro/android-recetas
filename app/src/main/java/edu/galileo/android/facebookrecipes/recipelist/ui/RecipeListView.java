@@ -7,6 +7,8 @@ import edu.galileo.android.facebookrecipes.entities.Recipe;
 /**
  * Created by ykro.
  */
-public interface RecipesListView {
+public interface RecipeListView {
     void setRecipes(List<Recipe> data);
+    void recipeUpdated();
+    void recipeDeleted(Recipe recipe);
 }

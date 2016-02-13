@@ -61,7 +61,7 @@ public class RecipeMainPresenterImpl implements RecipeMainPresenter {
     }
 
     @Override
-    public void onEvent(RecipeMainEvent event) {
+    public void onEventMainThread(RecipeMainEvent event) {
         if (this.view != null){
             String error = event.getError();
             if (error == null) {

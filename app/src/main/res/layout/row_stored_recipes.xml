@@ -34,16 +34,17 @@
         android:layout_alignLeft="@+id/txtRecipeName"
         android:layout_alignStart="@+id/txtRecipeName" />
 
-    <ImageButton
+
+
+    <com.facebook.share.widget.ShareButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_share"
         android:padding="@dimen/row_icons_padding"
-        android:tint="@android:color/darker_gray"
-        android:background="@android:color/transparent"
         android:id="@+id/imgShare"
         android:layout_below="@+id/txtRecipeName"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        />
+
 
     <ImageButton
         android:layout_width="wrap_content"

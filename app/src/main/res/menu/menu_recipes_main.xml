@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".recipemain.ui.RecipeMainActivity">
+    <item
+        android:id="@+id/action_list"
+        android:title="@string/recipemain.menu.action.list"
+        android:icon="@android:drawable/btn_star_big_off"
+        app:showAsAction="always" />
+</menu>

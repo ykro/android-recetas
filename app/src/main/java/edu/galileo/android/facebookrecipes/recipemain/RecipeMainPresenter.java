@@ -12,5 +12,5 @@ public interface RecipeMainPresenter {
     void dismissRecipe();
     void getNextRecipe();
     void saveRecipe(Recipe recipe);
-    void onEvent(RecipeMainEvent event);
+    void onEventMainThread(RecipeMainEvent event);
 }

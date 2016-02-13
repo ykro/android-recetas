@@ -8,6 +8,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.share.widget.ShareButton;
+
 import java.util.List;
 
 import butterknife.Bind;
@@ -32,6 +34,11 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
     public void setRecipes(List<Recipe> recipes) {
         this.recipes = recipes;
+        notifyDataSetChanged();
+    }
+
+    public void removeRecipe(Recipe recipe){
+        recipes.remove(recipe);
         notifyDataSetChanged();
     }
 
@@ -69,8 +76,13 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         TextView txtRecipeName;
         @Bind(R.id.imgFav)
         ImageButton imgFav;
+
+        @Bind(R.id.imgShare)
+        ShareButton imgShare;
+        /*
         @Bind(R.id.imgShare)
         ImageButton imgShare;
+        */
         @Bind(R.id.imgDelete)
         ImageButton imgDelete;
 

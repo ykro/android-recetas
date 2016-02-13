@@ -9,8 +9,8 @@ import edu.galileo.android.facebookrecipes.lib.di.LibsModule;
 import edu.galileo.android.facebookrecipes.recipelist.di.DaggerRecipeListComponent;
 import edu.galileo.android.facebookrecipes.recipelist.di.RecipeListComponent;
 import edu.galileo.android.facebookrecipes.recipelist.di.RecipeListModule;
-import edu.galileo.android.facebookrecipes.recipelist.ui.RecipesListActivity;
-import edu.galileo.android.facebookrecipes.recipelist.ui.RecipesListView;
+import edu.galileo.android.facebookrecipes.recipelist.ui.RecipeListActivity;
+import edu.galileo.android.facebookrecipes.recipelist.ui.RecipeListView;
 import edu.galileo.android.facebookrecipes.recipelist.ui.adapters.OnItemClickListener;
 import edu.galileo.android.facebookrecipes.recipemain.di.DaggerRecipeMainComponent;
 import edu.galileo.android.facebookrecipes.recipemain.di.RecipeMainComponent;
@@ -46,7 +46,7 @@ public class FacebookRecipesApp extends Application {
                 .build();
     }
 
-    public RecipeListComponent getRecipeListComponent(RecipesListActivity activity, RecipesListView view, OnItemClickListener onItemClickListener) {
+    public RecipeListComponent getRecipeListComponent(RecipeListActivity activity, RecipeListView view, OnItemClickListener onItemClickListener) {
         return DaggerRecipeListComponent
                 .builder()
                 .libsModule(new LibsModule(activity))

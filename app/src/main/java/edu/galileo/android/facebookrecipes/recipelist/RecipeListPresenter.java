@@ -9,8 +9,9 @@ import edu.galileo.android.facebookrecipes.recipelist.events.RecipeListEvent;
 public interface RecipeListPresenter {
     void onCreate();
     void onDestroy();
+
     void getRecipes();
-    void setFavorite(Recipe recipe);
-    void delteRecipe(Recipe recipe);
-    void onEvent(RecipeListEvent event);
+    void removeRecipe(Recipe recipe);
+    void toggleFavorite(Recipe recipe);
+    void onEventMainThread(RecipeListEvent event);
 }

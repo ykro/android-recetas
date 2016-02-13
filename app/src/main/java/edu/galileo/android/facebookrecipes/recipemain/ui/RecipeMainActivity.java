@@ -1,9 +1,12 @@
 package edu.galileo.android.facebookrecipes.recipemain.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -26,6 +29,7 @@ import edu.galileo.android.facebookrecipes.FacebookRecipesApp;
 import edu.galileo.android.facebookrecipes.R;
 import edu.galileo.android.facebookrecipes.entities.Recipe;
 import edu.galileo.android.facebookrecipes.lib.ImageLoader;
+import edu.galileo.android.facebookrecipes.recipelist.ui.RecipeListActivity;
 import edu.galileo.android.facebookrecipes.recipemain.RecipeMainPresenter;
 
 public class RecipeMainActivity extends AppCompatActivity implements RecipeMainView, SwipeGestureListener {
@@ -65,6 +69,34 @@ public class RecipeMainActivity extends AppCompatActivity implements RecipeMainV
         presenter.getNextRecipe();
     }
 
+    @Override
+    protected void onDestroy() {
+        presenter.onDestroy();
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_recipes_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_list) {
+            navigateToListScreen();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void navigateToListScreen() {
+        startActivity(new Intent(this, RecipeListActivity.class));
+    }
+
     private void setupGestureDetection() {
         final GestureDetector gestureDetector = new GestureDetector(this, new SwipeGestureDetector(this));
         View.OnTouchListener gestureListener = new View.OnTouchListener() {
@@ -95,12 +127,6 @@ public class RecipeMainActivity extends AppCompatActivity implements RecipeMainV
     private void setupInjection() {
         FacebookRecipesApp app = (FacebookRecipesApp)getApplication();
         app.getRecipeMainComponent(this, this).inject(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        presenter.onDestroy();
-        super.onDestroy();
     }
 
     @Override
@@ -189,12 +215,12 @@ public class RecipeMainActivity extends AppCompatActivity implements RecipeMainV
 
     @Override
     public void onGetRecipeError(String error) {
-        String msgError = String.format(getString(R.string.recipesmain_error), error);
+        String msgError = String.format(getString(R.string.recipemain_error), error);
         Snackbar.make(container, msgError, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRecipeSaved() {
-        Snackbar.make(container, R.string.recipesmain_notice_saved, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(container, R.string.recipemain_notice_saved, Snackbar.LENGTH_SHORT).show();
     }
 }

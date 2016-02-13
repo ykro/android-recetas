@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.facebook.login.LoginManager;
 
 import javax.inject.Inject;
 
@@ -29,6 +30,7 @@ import edu.galileo.android.facebookrecipes.FacebookRecipesApp;
 import edu.galileo.android.facebookrecipes.R;
 import edu.galileo.android.facebookrecipes.entities.Recipe;
 import edu.galileo.android.facebookrecipes.lib.ImageLoader;
+import edu.galileo.android.facebookrecipes.login.ui.LoginActivity;
 import edu.galileo.android.facebookrecipes.recipelist.ui.RecipeListActivity;
 import edu.galileo.android.facebookrecipes.recipemain.RecipeMainPresenter;
 
@@ -88,9 +90,21 @@ public class RecipeMainActivity extends AppCompatActivity implements RecipeMainV
         if (id == R.id.action_list) {
             navigateToListScreen();
             return true;
+        } else if (id == R.id.action_logout) {
+            logout();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void logout() {
+        LoginManager.getInstance().logOut();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     private void navigateToListScreen() {

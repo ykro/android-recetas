@@ -7,4 +7,11 @@
         android:title="@string/recipelist.menu.action.main"
         android:icon="@android:drawable/ic_menu_gallery"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/menu.action.logout"
+        app:showAsAction="never" />
+
+
 </menu>

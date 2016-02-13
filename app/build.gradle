@@ -19,11 +19,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "FACEBOOK_PROVIDER_AUTH", project.property('FACEBOOK_PROVIDER') + project.property('FACEBOOK_APP_ID')
             resValue "string", "FACEBOOK_APP_ID", project.property('FACEBOOK_APP_ID')
             buildConfigField "String", "FOOD_API_KEY", project.property('FOOD_API_KEY')
         }
 
         debug {
+            resValue "string", "FACEBOOK_PROVIDER_AUTH", project.property('FACEBOOK_PROVIDER') + project.property('FACEBOOK_APP_ID')
             resValue "string", "FACEBOOK_APP_ID", project.property('FACEBOOK_APP_ID')
             buildConfigField "String", "FOOD_API_KEY", project.property('FOOD_API_KEY')
         }

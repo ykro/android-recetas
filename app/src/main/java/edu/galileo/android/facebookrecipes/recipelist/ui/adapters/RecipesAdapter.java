@@ -1,5 +1,6 @@
 package edu.galileo.android.facebookrecipes.recipelist.ui.adapters;
 
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.SendButton;
 import com.facebook.share.widget.ShareButton;
 
 import java.util.List;
@@ -76,17 +79,14 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         TextView txtRecipeName;
         @Bind(R.id.imgFav)
         ImageButton imgFav;
-
-        @Bind(R.id.imgShare)
+        @Bind(R.id.fbShare)
         ShareButton imgShare;
-        /*
-        @Bind(R.id.imgShare)
-        ImageButton imgShare;
-        */
+        @Bind(R.id.fbSend)
+        SendButton btnSend;
         @Bind(R.id.imgDelete)
         ImageButton imgDelete;
 
-        View view;
+        private View view;
 
         public ViewHolder(View view) {
             super(view);
@@ -110,19 +110,18 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                 }
             });
 
-            imgShare.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onShareClick(recipe);
-                }
-            });
-
             imgDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     listener.onDeleteClick(recipe);
                 }
             });
+
+            ShareLinkContent content = new ShareLinkContent.Builder()
+                    .setContentUrl(Uri.parse(recipe.getSourceURL()))
+                    .build();
+            imgShare.setShareContent(content);
+            btnSend.setShareContent(content);
         }
     }
 }

@@ -14,6 +14,8 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import java.util.Arrays;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.galileo.android.facebookrecipes.R;
@@ -36,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         callbackManager = CallbackManager.Factory.create();
+        loginButton.setPublishPermissions(Arrays.asList("publish_actions"));
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {

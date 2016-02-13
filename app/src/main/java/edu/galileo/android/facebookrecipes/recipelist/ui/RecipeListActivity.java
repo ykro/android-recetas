@@ -6,9 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.facebook.login.LoginManager;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ import butterknife.ButterKnife;
 import edu.galileo.android.facebookrecipes.FacebookRecipesApp;
 import edu.galileo.android.facebookrecipes.R;
 import edu.galileo.android.facebookrecipes.entities.Recipe;
+import edu.galileo.android.facebookrecipes.login.ui.LoginActivity;
 import edu.galileo.android.facebookrecipes.recipelist.RecipeListPresenter;
 import edu.galileo.android.facebookrecipes.recipelist.ui.adapters.OnItemClickListener;
 import edu.galileo.android.facebookrecipes.recipelist.ui.adapters.RecipesAdapter;
@@ -64,9 +66,21 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListV
         if (id == R.id.action_main) {
             navigateToMainScreen();
             return true;
+        } else if (id == R.id.action_logout) {
+            logout();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void logout() {
+        LoginManager.getInstance().logOut();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     private void navigateToMainScreen() {
@@ -92,19 +106,6 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListV
     @Override
     public void onFavClick(Recipe recipe) {
         presenter.toggleFavorite(recipe);
-    }
-
-    @Override
-    public void onShareClick(Recipe recipe) {
-        Log.e("ASDF","share");
-        /*
-        SharePhoto photo = new SharePhoto.Builder()
-                .setBitmap(image)
-                .build();
-        SharePhotoContent content = new SharePhotoContent.Builder()
-                .addPhoto(photo)
-                .build();
-                */
     }
 
     @Override

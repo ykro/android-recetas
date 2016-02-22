@@ -68,7 +68,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListV
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_recipes_list, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

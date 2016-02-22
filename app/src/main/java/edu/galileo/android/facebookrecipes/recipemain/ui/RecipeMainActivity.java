@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -77,7 +76,7 @@ public class RecipeMainActivity extends AppCompatActivity implements RecipeMainV
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_recipes_main, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

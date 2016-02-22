@@ -23,21 +23,16 @@ public class RecipeMainRepositoryImpl implements RecipeMainRepository {
     public RecipeMainRepositoryImpl(EventBus eventBus, RecipeService service) {
         this.eventBus = eventBus;
         this.service = service;
+        this.recipePage = new Random().nextInt(RECIPE_RANGE);
     }
 
     @Override
-    public int getRecipePage() {
-        return this.recipePage;
-    }
-
-    private void setRecipePage() {
-        this.recipePage = (new Random()).nextInt(RECIPE_RANGE);
+    public void setRecipePage(int recipePage) {
+        this.recipePage = recipePage;
     }
 
     @Override
     public void getNextRecipe() {
-        setRecipePage();
-
         Call<RecipeSearchResponse> call = service.search(BuildConfig.FOOD_API_KEY, RECENT_SORT, COUNT, recipePage);
         call.enqueue(new Callback<RecipeSearchResponse>() {
             @Override
@@ -45,6 +40,7 @@ public class RecipeMainRepositoryImpl implements RecipeMainRepository {
                 if (response.isSuccess()) {
                     RecipeSearchResponse recipeSearchResponse = response.body();
                     if (recipeSearchResponse.getCount() == 0){
+                        setRecipePage(new Random().nextInt(RECIPE_RANGE));
                         getNextRecipe();
                     } else {
                         Recipe recipe = recipeSearchResponse.getFirstRecipe();

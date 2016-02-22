@@ -1,5 +1,7 @@
 package edu.galileo.android.facebookrecipes.recipemain;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import edu.galileo.android.facebookrecipes.entities.Recipe;
 import edu.galileo.android.facebookrecipes.lib.EventBus;
 import edu.galileo.android.facebookrecipes.recipemain.events.RecipeMainEvent;
@@ -33,6 +35,11 @@ public class RecipeMainPresenterImpl implements RecipeMainPresenter {
     }
 
     @Override
+    public RecipeMainView getView() {
+        return this.view;
+    }
+
+    @Override
     public void saveRecipe(Recipe recipe) {
         if (this.view != null){
             view.saveAnimation();
@@ -61,6 +68,7 @@ public class RecipeMainPresenterImpl implements RecipeMainPresenter {
     }
 
     @Override
+    @Subscribe
     public void onEventMainThread(RecipeMainEvent event) {
         if (this.view != null){
             String error = event.getError();

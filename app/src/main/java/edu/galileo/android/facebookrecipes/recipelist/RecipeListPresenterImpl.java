@@ -1,5 +1,7 @@
 package edu.galileo.android.facebookrecipes.recipelist;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import edu.galileo.android.facebookrecipes.entities.Recipe;
 import edu.galileo.android.facebookrecipes.lib.EventBus;
 import edu.galileo.android.facebookrecipes.recipelist.events.RecipeListEvent;
@@ -33,6 +35,11 @@ public class RecipeListPresenterImpl implements RecipeListPresenter {
     }
 
     @Override
+    public RecipeListView getView() {
+        return this.view;
+    }
+
+    @Override
     public void getRecipes() {
         listInteractor.execute();
     }
@@ -50,6 +57,7 @@ public class RecipeListPresenterImpl implements RecipeListPresenter {
     }
 
     @Override
+    @Subscribe
     public void onEventMainThread(RecipeListEvent event) {
         if (this.view != null) {
             switch (event.getType()){

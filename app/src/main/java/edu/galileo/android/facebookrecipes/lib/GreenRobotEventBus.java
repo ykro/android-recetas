@@ -4,18 +4,10 @@ package edu.galileo.android.facebookrecipes.lib;
  * Created by ykro.
  */
 public class GreenRobotEventBus implements EventBus {
-    de.greenrobot.event.EventBus eventBus;
-
-    private static class SingletonHolder {
-        private static final GreenRobotEventBus INSTANCE = new GreenRobotEventBus();
-    }
-
-    public static GreenRobotEventBus getInstance() {
-        return SingletonHolder.INSTANCE;
-    }
+    org.greenrobot.eventbus.EventBus eventBus;
 
     public GreenRobotEventBus(){
-        eventBus = de.greenrobot.event.EventBus.getDefault();
+        eventBus = org.greenrobot.eventbus.EventBus.getDefault();
     }
 
     public void register(Object subscriber){

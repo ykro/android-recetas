@@ -7,4 +7,5 @@
     <dimen name="recipes_main_image_width">430dp</dimen>
     <dimen name="recipes_main_image_height">310dp</dimen>
     <dimen name="recipes_list_image_size">150dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
 </resources>

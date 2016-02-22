@@ -16,11 +16,9 @@ import retrofit2.Response;
  * Created by ykro.
  */
 public class RecipeMainRepositoryImpl implements RecipeMainRepository {
-    EventBus eventBus;
-    RecipeService service;
-
-    private final static int COUNT = 1;
-    private final static String RECENT_SORT = "r";
+    private int recipePage;
+    private EventBus eventBus;
+    private RecipeService service;
 
     public RecipeMainRepositoryImpl(EventBus eventBus, RecipeService service) {
         this.eventBus = eventBus;
@@ -28,9 +26,18 @@ public class RecipeMainRepositoryImpl implements RecipeMainRepository {
     }
 
     @Override
+    public int getRecipePage() {
+        return this.recipePage;
+    }
+
+    private void setRecipePage() {
+        this.recipePage = (new Random()).nextInt(RECIPE_RANGE);
+    }
+
+    @Override
     public void getNextRecipe() {
-        Random r = new Random();
-        int recipePage = r.nextInt(100000);
+        setRecipePage();
+
         Call<RecipeSearchResponse> call = service.search(BuildConfig.FOOD_API_KEY, RECENT_SORT, COUNT, recipePage);
         call.enqueue(new Callback<RecipeSearchResponse>() {
             @Override

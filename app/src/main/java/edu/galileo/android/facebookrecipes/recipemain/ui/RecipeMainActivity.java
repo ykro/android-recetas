@@ -21,8 +21,6 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.facebook.login.LoginManager;
 
-import javax.inject.Inject;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -33,6 +31,7 @@ import edu.galileo.android.facebookrecipes.lib.ImageLoader;
 import edu.galileo.android.facebookrecipes.login.ui.LoginActivity;
 import edu.galileo.android.facebookrecipes.recipelist.ui.RecipeListActivity;
 import edu.galileo.android.facebookrecipes.recipemain.RecipeMainPresenter;
+import edu.galileo.android.facebookrecipes.recipemain.di.RecipeMainComponent;
 
 public class RecipeMainActivity extends AppCompatActivity implements RecipeMainView, SwipeGestureListener {
     @Bind(R.id.imgRecipe)
@@ -50,13 +49,10 @@ public class RecipeMainActivity extends AppCompatActivity implements RecipeMainV
     @Bind(R.id.layoutContainer)
     RelativeLayout container;
 
-    @Inject
-    ImageLoader imageLoader;
-
-    @Inject
-    RecipeMainPresenter presenter;
-
     private Recipe currentRecipe;
+    private ImageLoader imageLoader;
+    private RecipeMainPresenter presenter;
+    private RecipeMainComponent component;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +136,18 @@ public class RecipeMainActivity extends AppCompatActivity implements RecipeMainV
 
     private void setupInjection() {
         FacebookRecipesApp app = (FacebookRecipesApp)getApplication();
-        app.getRecipeMainComponent(this, this).inject(this);
+        //app.getRecipeMainComponent(this, this).inject(this);
+        component = app.getRecipeMainComponent(this, this);
+        imageLoader = getImageLoader();
+        presenter = getPresenter();
+    }
+
+    public ImageLoader getImageLoader() {
+        return component.getImageLoader();
+    }
+
+    public RecipeMainPresenter getPresenter() {
+        return component.getPresenter();
     }
 
     @Override

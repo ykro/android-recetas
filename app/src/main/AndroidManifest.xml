@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".recipemain.ui.RecipeMainActivity" />
-        <activity android:name=".recipelist.ui.RecipeListActivity" />
+        <activity android:name=".recipelist.ui.RecipeListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

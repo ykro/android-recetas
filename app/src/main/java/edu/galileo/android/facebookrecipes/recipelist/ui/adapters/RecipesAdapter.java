@@ -59,6 +59,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
         imageLoader.load(holder.imgRecipe, currentRecipe.getImageURL());
         holder.txtRecipeName.setText(currentRecipe.getTitle());
+        holder.imgFav.setTag(currentRecipe.getFavorite());
         if (currentRecipe.getFavorite()) {
             holder.imgFav.setImageResource(android.R.drawable.btn_star_big_on);
         } else {
